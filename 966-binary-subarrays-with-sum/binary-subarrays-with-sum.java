@@ -27,16 +27,16 @@ class Solution {
     return count;
     }
     public int variableSlidingWindow(int[]nums,int k){
-    int left=0,n=nums.length,sum=0,count=0;
+    if(k<0) return 0;
+    int left=0,n=nums.length,sum=0,length=0;
     for(int right=0;right<n;right++){
         sum+=nums[right];
         while(sum>k && left<=right){
         sum-=nums[left++];
         }
-        if(sum<=k) 
-        count++;
+        length+=right-left+1;
     }
-    return count;
+    return length;
     }
     public int prefixSumHashMap(int[]nums,int k){
     HashMap<Integer,Integer>map=new HashMap<>();
@@ -54,7 +54,7 @@ class Solution {
     return 0;
     // return bf(nums,goal);
     // return prefixSum(nums,goal);
-    // return (variableSlidingWindow(nums,goal)-variableSlidingWindow(nums,goal-1));
-    return prefixSumHashMap(nums,goal);
+    return (variableSlidingWindow(nums,goal)-variableSlidingWindow(nums,goal-1));
+    // return prefixSumHashMap(nums,goal);
     }
 }
